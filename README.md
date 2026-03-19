@@ -66,10 +66,30 @@ python scripts/init_db.py
 python scripts/run_scraper.py
 ```
 
+Targeted brand recrawl (example):
+
+```powershell
+python scripts/run_scraper.py --brand alfa_romeo
+```
+
+Expanded crawl from repo root (same spider, explicit settings module):
+
+```powershell
+$env:PYTHONPATH='d:/lemonaid-app/scrapers'
+$env:SCRAPY_SETTINGS_MODULE='car_scraper.settings'
+& "d:/lemonaid-app/.venv/Scripts/python.exe" -m scrapy crawl carchecker_issues -s LOG_LEVEL=INFO
+```
+
 ### 6) Build vector index from scraped issue references
 
 ```powershell
 python scripts/index_issue_references.py
+```
+
+Generate scrape quality report:
+
+```powershell
+python scripts/scrape_quality_report.py --output reports/scrape_quality.json
 ```
 
 ### 7) Start local API
@@ -82,6 +102,12 @@ Health check:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8000/health
+```
+
+Issue dataset stats:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/stats/issues
 ```
 
 ### 8) Load Chrome extension
@@ -124,3 +150,4 @@ Response includes:
 - If `DEEPSEEK_API_KEY` is missing, the API returns a deterministic fallback analysis based on retrieved context.
 - The carchecker spider uses heuristic selectors and may need tuning as the target HTML changes.
 - For Turkish ad pages, metadata extraction in `extension/content.js` is currently baseline and should be expanded field-by-field during calibration.
+- On Windows, `chromadb` may require MSVC Build Tools (`chroma-hnswlib` build dependency). If unavailable, API and SQL retrieval still work and vector indexing is skipped gracefully.

@@ -6,11 +6,12 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from api.schemas import AnalyzeRequest, AnalyzeResponse
+from api.schemas import AnalyzeRequest, AnalyzeResponse, IssueStatsResponse
 from rag.analyzer import analyze_listing
 from rag.retriever import retrieve_issue_context
 from storage.db import create_all_tables, get_db_session
 from storage.models import AdListing, ListingIssueAnalysis
+from storage.stats import build_issue_stats
 
 app = FastAPI(title="Lemonaid Analyzer API", version="0.1.0")
 
@@ -23,6 +24,11 @@ def startup() -> None:
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/stats/issues", response_model=IssueStatsResponse)
+def issue_stats(db: Session = Depends(get_db_session)) -> IssueStatsResponse:
+    return IssueStatsResponse(**build_issue_stats(db))
 
 
 def _build_transient_listing(payload: AnalyzeRequest) -> AdListing:

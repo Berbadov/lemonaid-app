@@ -1,0 +1,126 @@
+{
+  "total_issues": 10301,
+  "distinct_reports": 877,
+  "by_domain": [
+    {
+      "label": "engine",
+      "count": 3872
+    },
+    {
+      "label": "manufacturing",
+      "count": 3473
+    },
+    {
+      "label": "general",
+      "count": 1372
+    },
+    {
+      "label": "body",
+      "count": 854
+    },
+    {
+      "label": "powertrain",
+      "count": 730
+    }
+  ],
+  "by_severity": [
+    {
+      "label": "medium",
+      "count": 4865
+    },
+    {
+      "label": "high",
+      "count": 2842
+    },
+    {
+      "label": "low",
+      "count": 2594
+    }
+  ],
+  "top_makes": [
+    {
+      "label": "BMW",
+      "count": 1184
+    },
+    {
+      "label": "Audi",
+      "count": 1115
+    },
+    {
+      "label": "Volkswagen",
+      "count": 902
+    },
+    {
+      "label": "Mercedes-Benz",
+      "count": 646
+    },
+    {
+      "label": "Ford",
+      "count": 501
+    },
+    {
+      "label": "Opel",
+      "count": 474
+    },
+    {
+      "label": "Renault",
+      "count": 433
+    },
+    {
+      "label": "Peugeot",
+      "count": 418
+    },
+    {
+      "label": "Skoda",
+      "count": 388
+    },
+    {
+      "label": "Toyota",
+      "count": 384
+    }
+  ],
+  "top_models": [
+    {
+      "label": "Golf",
+      "count": 363
+    },
+    {
+      "label": "A3",
+      "count": 247
+    },
+    {
+      "label": "Astra",
+      "count": 177
+    },
+    {
+      "label": "A4",
+      "count": 174
+    },
+    {
+      "label": "Focus",
+      "count": 171
+    },
+    {
+      "label": "Octavia",
+      "count": 154
+    },
+    {
+      "label": "Leon",
+      "count": 145
+    },
+    {
+      "label": "Corsa",
+      "count": 120
+    },
+    {
+      "label": "Clio",
+      "count": 113
+    },
+    {
+      "label": "Megane",
+      "count": 104
+    }
+  ],
+  "missing_make_count": 0,
+  "missing_model_count": 0
+}

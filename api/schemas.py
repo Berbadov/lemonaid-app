@@ -25,3 +25,19 @@ class AnalyzeResponse(BaseModel):
     risks: list[RiskItem]
     listing_id: int | None = None
     source: str | None = None
+
+
+class LabeledCount(BaseModel):
+    label: str
+    count: int
+
+
+class IssueStatsResponse(BaseModel):
+    total_issues: int
+    distinct_reports: int
+    by_domain: list[LabeledCount]
+    by_severity: list[LabeledCount]
+    top_makes: list[LabeledCount]
+    top_models: list[LabeledCount]
+    missing_make_count: int
+    missing_model_count: int

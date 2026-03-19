@@ -16,6 +16,13 @@ def main() -> None:
             return
 
         store = ChromaIssueStore()
+        if not store.enabled:
+            print(
+                "Vector backend unavailable (chromadb not installed with native deps). "
+                "Skipping vector indexing."
+            )
+            return
+
         ids = []
         docs = []
         metas = []

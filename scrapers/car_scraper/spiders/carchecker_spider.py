@@ -10,6 +10,13 @@ from car_scraper.items import IssueReferenceItem
 class CarCheckerSpider(scrapy.Spider):
     name = "carchecker_issues"
     allowed_domains = ["carchecker.pro"]
+    multiword_makes = (
+        "Alfa Romeo",
+        "Aston Martin",
+        "Land Rover",
+        "Range Rover",
+        "Rolls-Royce",
+    )
     start_urls = [
         "https://www.carchecker.pro/sitemap.xml",
         "https://www.carchecker.pro/",
@@ -18,6 +25,10 @@ class CarCheckerSpider(scrapy.Spider):
     custom_settings = {
         "DEPTH_LIMIT": 2,
     }
+
+    def __init__(self, brand: str | None = None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.brand_filter = (brand or "").strip().lower() or None
 
     def parse(self, response: scrapy.http.Response):
         # Sitemap provides the most complete coverage; homepage anchors are backup discovery.
@@ -29,7 +40,7 @@ class CarCheckerSpider(scrapy.Spider):
         report_hrefs = response.css("a[href*='/reports/']::attr(href)").getall()
         for href in sorted(set(report_hrefs)):
             absolute = response.urljoin(href)
-            if self._is_report_url(absolute):
+            if self._is_report_target(absolute):
                 yield response.follow(absolute, callback=self.parse_report)
 
     def parse_sitemap(self, response: scrapy.http.Response):
@@ -43,8 +54,17 @@ class CarCheckerSpider(scrapy.Spider):
                 yield response.follow(url, callback=self.parse_sitemap)
                 continue
 
-            if self._is_report_url(url):
+            if self._is_report_target(url):
                 yield response.follow(url, callback=self.parse_report)
+
+    def _is_report_target(self, url: str) -> bool:
+        if not self._is_report_url(url):
+            return False
+        if not self.brand_filter:
+            return True
+
+        slug = url.rsplit("/", 1)[-1]
+        return slug.startswith(f"{self.brand_filter}_")
 
     def parse_report(self, response: scrapy.http.Response):
         title = (response.css("h1::text").get() or "").strip()
@@ -52,7 +72,10 @@ class CarCheckerSpider(scrapy.Spider):
             return
 
         breadcrumb = [t.strip() for t in response.css("nav.breadcrumb a::text").getall() if t.strip()]
-        make = breadcrumb[1] if len(breadcrumb) > 1 else self._extract_make_from_title(title)
+        breadcrumb_make = breadcrumb[1] if len(breadcrumb) > 1 else None
+        make = self._normalize_make(breadcrumb_make, title)
+        if not make:
+            make = self._extract_make_from_title(title)
         model = self._extract_model_from_title(title=title, make=make)
 
         subtitle = self._clean_text(response.css("p.subtitle::text").get() or "")
@@ -184,6 +207,10 @@ class CarCheckerSpider(scrapy.Spider):
 
     @staticmethod
     def _extract_make_from_title(title: str) -> str | None:
+        for make in CarCheckerSpider.multiword_makes:
+            if title.startswith(f"{make} "):
+                return make
+
         tokens = title.split()
         if not tokens:
             return None
@@ -199,7 +226,24 @@ class CarCheckerSpider(scrapy.Spider):
         if not tokens:
             return None
 
+        # Avoid treating engine/generation markers as model names when titles are short.
+        if len(tokens) > 1 and re.fullmatch(r"(?:mk\d+|[a-z]{1,3}\d{1,3})", tokens[0], re.IGNORECASE):
+            return tokens[1]
+
         return tokens[0]
+
+    @staticmethod
+    def _normalize_make(make: str | None, title: str) -> str | None:
+        if not make:
+            return None
+
+        make_clean = make.strip()
+        for full_make in CarCheckerSpider.multiword_makes:
+            if title.startswith(f"{full_make} "):
+                # Use full make when breadcrumb only contains first token (e.g. Alfa).
+                if make_clean == full_make.split()[0] or make_clean == full_make:
+                    return full_make
+        return make_clean
 
     @staticmethod
     def _extract_generation(title: str) -> str | None:

@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class ChromaIssueStore:
     def __init__(self, collection_name: str = "issue_reference") -> None:
+        self.enabled = False
         self.client = None
         self.collection = None
 
@@ -32,6 +33,7 @@ class ChromaIssueStore:
             name=collection_name,
             metadata={"description": "Issue reference snippets for retrieval"},
         )
+        self.enabled = True
 
     def upsert_documents(
         self,
