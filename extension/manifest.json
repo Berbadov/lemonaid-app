@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Lemonaid Car Analyzer",
+  "description": "Shows possible issues for second-hand car listings.",
+  "version": "0.1.0",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "https://*.sahibinden.com/*",
+    "https://www.carchecker.pro/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Lemonaid Analyzer",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.sahibinden.com/*", "https://www.carchecker.pro/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

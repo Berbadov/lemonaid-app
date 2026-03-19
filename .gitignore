@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+
+# Environment
+.env
+
+# Databases and indexes
+*.db
+*.sqlite
+*.sqlite3
+chroma_db/
+
+# Scrapy
+.scrapy/
+
+# Node / extension artifacts
+node_modules/
+
+# Editors
+.vscode/
+.idea/

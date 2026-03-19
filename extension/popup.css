@@ -1,0 +1,99 @@
+:root {
+  --bg: #f4f4ef;
+  --panel: #fffefa;
+  --text: #1d2433;
+  --muted: #5a6478;
+  --accent: #006a67;
+  --border: #d8d9cf;
+  --high: #b5392f;
+  --med: #a3641a;
+  --low: #2d7b41;
+}
+
+body {
+  margin: 0;
+  min-width: 340px;
+  background: radial-gradient(circle at 20% 10%, #fff9db 0%, var(--bg) 56%);
+  color: var(--text);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.panel {
+  padding: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+}
+
+.subtitle {
+  margin: 6px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+button {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.status {
+  min-height: 18px;
+  margin: 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.result {
+  display: grid;
+  gap: 8px;
+}
+
+.risk-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left-width: 5px;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.risk-card.high {
+  border-left-color: var(--high);
+}
+
+.risk-card.medium {
+  border-left-color: var(--med);
+}
+
+.risk-card.low {
+  border-left-color: var(--low);
+}
+
+.risk-title {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.risk-meta {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.risk-rationale {
+  margin: 0;
+  font-size: 12px;
+}
