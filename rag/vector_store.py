@@ -14,16 +14,21 @@ from config import ROOT_DIR, SETTINGS, ensure_data_dirs
 
 
 logger = logging.getLogger(__name__)
+_warned_missing_backend = False
 
 
 class ChromaIssueStore:
     def __init__(self, collection_name: str = "issue_reference") -> None:
+        global _warned_missing_backend
+
         self.enabled = False
         self.client = None
         self.collection = None
 
         if chromadb is None:
-            logger.warning("chromadb unavailable; vector retrieval disabled for this runtime")
+            if not _warned_missing_backend:
+                logger.warning("chromadb unavailable; vector retrieval disabled for this runtime")
+                _warned_missing_backend = True
             return
 
         ensure_data_dirs()

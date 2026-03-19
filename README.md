@@ -92,6 +92,16 @@ Generate scrape quality report:
 python scripts/scrape_quality_report.py --output reports/scrape_quality.json
 ```
 
+Run Level-5 Sahibinden evaluation:
+
+```powershell
+python scripts/eval_sahibinden_level5.py --max-samples 10 --output reports/sahibinden_level5_eval.json
+```
+
+Detailed per-sample risk output is shown in the console by default.
+Use `--max-risks-per-sample` to control how many risk items are shown for each listing,
+and add `--print-json` if you also want the full JSON report printed to stdout.
+
 ### 7) Start local API
 
 ```powershell

@@ -2,8 +2,16 @@ const statusNode = document.getElementById("status");
 const resultNode = document.getElementById("result");
 const analyzeButton = document.getElementById("analyze-btn");
 
+function clipText(value, maxLength = 180) {
+  const text = String(value ?? "").trim();
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.slice(0, maxLength - 1).trimEnd()}...`;
+}
+
 function setStatus(message) {
-  statusNode.textContent = message;
+  statusNode.textContent = clipText(message, 200);
 }
 
 function clearResults() {
@@ -16,7 +24,7 @@ function createRiskCard(risk) {
 
   const title = document.createElement("p");
   title.className = "risk-title";
-  title.textContent = risk.title || "Untitled Risk";
+  title.textContent = clipText(risk.title || "Untitled Risk", 90);
 
   const meta = document.createElement("p");
   meta.className = "risk-meta";
@@ -25,7 +33,7 @@ function createRiskCard(risk) {
 
   const rationale = document.createElement("p");
   rationale.className = "risk-rationale";
-  rationale.textContent = risk.rationale || "No rationale provided.";
+  rationale.textContent = clipText(risk.rationale || "No rationale provided.", 190);
 
   wrapper.appendChild(title);
   wrapper.appendChild(meta);

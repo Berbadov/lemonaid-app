@@ -1,0 +1,131 @@
+{
+  "mode": "deepseek",
+  "sample_count": 1,
+  "success_count": 1,
+  "success_rate": 1.0,
+  "avg_latency_ms": 45634.56,
+  "avg_risks_per_success": 8.0,
+  "invalid_severity_count": 0,
+  "missing_field_risk_count": 0,
+  "expected_domain_hit_rate": 0.6667,
+  "severity_distribution": {
+    "high": 2,
+    "medium": 5,
+    "low": 1
+  },
+  "domain_distribution": {
+    "engine": 2,
+    "manufacturing": 1,
+    "body/structure": 1,
+    "fuel system": 1,
+    "turbocharger": 1,
+    "transmission": 1,
+    "emissions": 1
+  },
+  "sample_reports": [
+    {
+      "title": "2017 Renault Clio 1.5 dCi Touch",
+      "make": "Renault",
+      "model": "Clio",
+      "latency_ms": 45634.56,
+      "status_code": 200,
+      "risk_count": 8,
+      "summary": "This 2017 Renault Clio 1.5 dCi with 148,000 km presents several significant risks despite the seller's claim of regular maintenance and recent injector service. The high mileage puts it in the critical range for timing chain issues, and the diesel engine differs from the reference context's 1.0 TCe gasoline engine, requiring careful interpretation of risks. Key concerns include potential timing chain failure, unknown recall status, and possible hidden damage from the mentioned paintwork.",
+      "summary_excerpt": "This 2017 Renault Clio 1.5 dCi with 148,000 km presents several significant risks despite the seller's claim of regular maintenance and recent injector service. The high mileage p...",
+      "domains": [
+        "body/structure",
+        "emissions",
+        "engine",
+        "fuel system",
+        "manufacturing",
+        "transmission",
+        "turbocharger"
+      ],
+      "expected_domains": [
+        "engine",
+        "body",
+        "manufacturing"
+      ],
+      "missing_expected_domains": [
+        "body"
+      ],
+      "high_risk_count": 2,
+      "medium_risk_count": 5,
+      "low_risk_count": 1,
+      "risks": [
+        {
+          "title": "Timing Chain Wear at Critical Mileage",
+          "severity": "high",
+          "confidence": 0.8,
+          "domain": "engine",
+          "rationale": "The vehicle has 148,000 km, which falls within the 120,000-150,000 km range where timing chain stretch and tensioner wear become likely in similar Renault engines. While the reference context specifically mentions the 1.0 TCe gasoline engine, diesel engines like the 1.5 dCi also use timing chains with hydraulic tensioners that are susceptible to similar wear patterns at high mileage. Chain failure can cause catastrophic engine damage.",
+          "inspection_advice": "Listen for metallic rattling during cold starts (lasts 2-3 seconds). Check service history for timing chain replacement or tensioner service. Ask if oil changes were done every 15,000 km or less with proper 5W-30 oil. Consider a pre-purchase inspection that includes timing chain assessment.",
+          "missing_fields": []
+        },
+        {
+          "title": "Unverified Recall Status",
+          "severity": "high",
+          "confidence": 0.9,
+          "domain": "manufacturing",
+          "rationale": "The reference context lists multiple recalls affecting 2019+ Clio V models, including critical fire risk from battery/alternator contact. While this is a 2017 model (Clio IV generation), Renault has had recall patterns across model years. The seller hasn't provided recall completion verification, and early production vehicles often have unaddressed safety recalls.",
+          "inspection_advice": "Obtain the VIN and contact a Renault dealer to verify all recalls have been completed. Specifically ask about battery/alternator, power steering, and seat restraint recalls. Do not purchase without documented recall completion.",
+          "missing_fields": []
+        },
+        {
+          "title": "Previous Paintwork and Possible Hidden Damage",
+          "severity": "medium",
+          "confidence": 0.7,
+          "domain": "body/structure",
+          "rationale": "The description mentions 'Sol on camurluk boyali' (left fender painted), indicating accident repair or damage. While described as just paintwork, this could mask underlying structural damage, poor repair quality, or corrosion issues. Diesel vehicles are particularly sensitive to cooling system integrity, which could be compromised in front-end repairs.",
+          "inspection_advice": "Thoroughly inspect the painted fender and surrounding areas for uneven gaps, mismatched paint, or signs of filler. Check for coolant leaks around the thermostat housing (common Renault issue). Consider a professional inspection focusing on frame alignment and repair quality.",
+          "missing_fields": []
+        },
+        {
+          "title": "High-Mileage Diesel Injector Reliability",
+          "severity": "medium",
+          "confidence": 0.6,
+          "domain": "fuel system",
+          "rationale": "While the seller mentions recent injector maintenance, diesel injectors at 148,000 km are near end-of-life for many vehicles. The 1.5 dCi engine is known for injector issues in some model years. Poor injector performance affects fuel economy, emissions, and can damage the diesel particulate filter.",
+          "inspection_advice": "Verify documentation of the injector service. During test drive, listen for uneven idle, excessive smoke (especially black smoke), or hesitation during acceleration. Check for stored fault codes related to fuel system or emissions.",
+          "missing_fields": []
+        },
+        {
+          "title": "Valve Clearance Adjustment Neglect",
+          "severity": "medium",
+          "confidence": 0.65,
+          "domain": "engine",
+          "rationale": "The reference context notes that similar Renault engines require manual valve clearance adjustment every 60,000 km. At 148,000 km, this service should have been performed at least twice. Neglect causes power loss, rough running, and potential valve damage. Many owners and workshops overlook this maintenance item.",
+          "inspection_advice": "Review service records specifically for valve clearance adjustment at 60,000 km and 120,000 km intervals. Listen for tapping or clicking noises from the engine at idle. Consider budgeting €200-500 for this service if not documented.",
+          "missing_fields": []
+        },
+        {
+          "title": "Turbocharger and Wastegate Wear",
+          "severity": "medium",
+          "confidence": 0.55,
+          "domain": "turbocharger",
+          "rationale": "Diesel turbos at high mileage experience wear on wastegate actuators, bearings, and seals. While the reference context specifically addresses gasoline turbo wastegate rattle, diesel turbos face similar issues with added soot accumulation. Failure causes loss of power, excessive smoke, or oil consumption.",
+          "inspection_advice": "Check for turbo whine or whistling during acceleration. Listen for wastegate rattle during deceleration. Inspect for oil leaks around turbo connections. Check for excessive black smoke during hard acceleration.",
+          "missing_fields": []
+        },
+        {
+          "title": "Dual Mass Flywheel Wear",
+          "severity": "medium",
+          "confidence": 0.6,
+          "domain": "transmission",
+          "rationale": "Manual transmission diesel vehicles commonly experience dual mass flywheel failure at high mileage. Symptoms include vibration at idle, clutch chatter, and rattling noises when engaging/disengaging the clutch. Replacement costs €400-800 including labor.",
+          "inspection_advice": "Test for vibrations at idle that disappear when clutch is depressed. Listen for rattling when starting the engine or when engaging gears. Check for excessive clutch pedal vibration.",
+          "missing_fields": []
+        },
+        {
+          "title": "DPF (Diesel Particulate Filter) Issues",
+          "severity": "low",
+          "confidence": 0.5,
+          "domain": "emissions",
+          "rationale": "At 148,000 km, the DPF may be nearing replacement if the vehicle was used primarily for short trips. Regeneration issues cause warning lights, reduced power, and potential expensive repairs. The recent injector service suggests possible DPF-related maintenance.",
+          "inspection_advice": "Check for DPF warning lights on the dashboard. Ask about driving patterns (frequent short trips accelerate DPF clogging). Verify if DPF regeneration has been performed recently. Check service history for DPF cleaning or replacement.",
+          "missing_fields": []
+        }
+      ]
+    }
+  ]
+}
